@@ -2,6 +2,7 @@ class RockPaperScissors
 
   # Exceptions this class can raise:
   class NoSuchStrategyError < StandardError ; end
+  class InvalidNameError < StandardError ; end
 
   def self.winner(player1, player2)
     
@@ -11,6 +12,8 @@ class RockPaperScissors
     
     raise NoSuchStrategyError, "Strategy must be one of R,P,S" if (player1Strat == nil)
     raise NoSuchStrategyError, "Strategy must be one of R,P,S" if (player2Strat == nil)
+    raise InvalidNameError, "Name of player must be a string" if (!player1[0].kind_of? String)
+    raise InvalidNameError, "Name of player must be a string" if (!player2[0].kind_of? String)
     
     # player 1 throws rock
     if (player1[1] == "R" and player2[1] == 'P')

@@ -30,14 +30,17 @@ module FunWithStrings
   
   def anagram_groups
     anagrams = Hash.new
+    
     self.split(/\s/).each { |word|
-      test = word.chars.sort.join
-      if !anagrams.has_key?(test)
-        anagrams.store(test, [word])
+      sortedWord = word.chars.sort.join
+      
+      if (!anagrams.has_key?(sortedWord))
+        anagrams.store(sortedWord, [word])
       else
         anagrams.keys.each{ |key|
-          if test == key
-            anagrams[key].insert(0, word)
+        
+          if (sortedWord == key and !anagrams[key].include?(word))
+            anagrams[key] << word
           end
         }
       end
@@ -46,7 +49,7 @@ module FunWithStrings
     # add each anagram group into a list, because that's what's expected
     anagramGroups = Array.new
     anagrams.values.each{ |group|
-      anagramGroups.insert(0, group)
+      anagramGroups << group
     }
     return anagramGroups
   end

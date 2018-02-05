@@ -22,6 +22,9 @@ describe RockPaperScissors do
   it "should raise NoSuchStrategyError if strategy isn't R, P, or S" do
     expect(lambda { RockPaperScissors.winner(@rock, ['Dave', 'w']) }).to raise_error(RockPaperScissors::NoSuchStrategyError, "Strategy must be one of R,P,S")
   end
+  it "Should raise InvalidNameError if the name isn't a string" do
+    expect(lambda {RockPaperScissors.winner(@scissors, [12, 'R']) }).to raise_error(RockPaperScissors::InvalidNameError, "Name of player must be a string")
+  end
   describe 'tournament' do
     it 'base case' do
       expect(RockPaperScissors.tournament_winner([@rock,@paper])).to eq(@paper)

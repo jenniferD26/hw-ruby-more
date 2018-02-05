@@ -8,7 +8,7 @@ class TestClass2
   attr_accessor_with_history 'foo'
 end
 
-describe '#attr_accessor_with_history', :pending => true do
+describe '#attr_accessor_with_history' do
   shared_examples 'all cases' do
     it 'should define getter and setter' do
       @subject.foo = 'xyz'
@@ -47,5 +47,11 @@ describe '#attr_accessor_with_history', :pending => true do
     obj2.foo = 1  ; obj2.foo = 2
     expect(obj1.foo_history).to eq([nil, :x])
     expect(obj2.foo_history).to eq([nil, 1])
+  end
+  
+    it 'should do something' do
+    obj3 = TestClass1.new
+    obj3.foo = 1 ; obj3.foo = 'a' ; obj3.foo = :x ; obj3.foo = nil
+    expect(obj3.foo_history).to eq([nil, 1, 'a', :x])
   end
 end

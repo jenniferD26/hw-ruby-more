@@ -25,6 +25,8 @@ describe Dessert do
       @dessert.name = 'ice cream'
       expect(@dessert.name).to eq('ice cream')
     end
+    subject { @dessert }
+    it {should be_delicious }
   end
 end
 
@@ -34,6 +36,7 @@ describe JellyBean do
     its(:calories) { should == 5 }
     its(:name)     { should match /vanilla jelly bean/i }
     it             { should be_delicious }
+    it             { should be_healthy } 
   end
   describe 'when popcorn' do
     subject { JellyBean.new('popcorn') }

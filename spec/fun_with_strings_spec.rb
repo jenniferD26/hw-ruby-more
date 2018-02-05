@@ -9,9 +9,10 @@ describe 'palindrome detection' do
   it 'should be case-insensitive' do
     expect('ReDivider').to be_a_palindrome
   end
-  it 'should ignore nonword characters' do
+  it 'should ignore nonword characters and white space' do
     expect('A man, a plan, a canal -- Panama').to be_a_palindrome
     expect("Madam, I'm Adam!").to be_a_palindrome
+    expect("r     a        c e     c   ar").to be_a_palindrome
   end    
 end
 
@@ -43,6 +44,11 @@ describe 'anagram grouping' do
     end
     it 'should return an array of arrays for nonempty string' do
       'x'.anagram_groups.each { |element| expect(element).to be_an Array }
+    end
+    it 'should ignore doubles.' do
+      @anagrams = 'rats rats tars tars star star'.anagram_groups
+      @anagrams.each { |group| group.sort! }
+      expect(@anagrams).to match_array [["rats", "star", "tars"]]
     end
   end
   it 'for "scream cars for four scar creams"' do
